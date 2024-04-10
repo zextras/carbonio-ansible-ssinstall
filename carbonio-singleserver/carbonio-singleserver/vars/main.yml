@@ -1,0 +1,9 @@
+---
+# vars file for carbonio-singleserver
+unnecessary_servises:
+  - carbonio-clamav-sidecar.service
+  - carbonio-mta-sidecar.service
+
+hcl_paths:
+  - /etc/zextras/service-discover/carbonio-clamav.hcl
+  - /etc/zextras/service-discover/carbonio-mta.hcl

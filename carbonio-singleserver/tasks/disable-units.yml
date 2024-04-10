@@ -1,0 +1,29 @@
+---
+
+  - name: Stop and disable clamav-sidecar
+    ansible.builtin.systemd:
+      name: carbonio-clamav-sidecar.service
+      state: stopped 
+      enabled: false
+      masked: yes
+
+  - name: Get list of carbonio-prometheus services
+    shell: "systemctl list-units --all 'carbonio-prometheus*.service' | grep -o 'carbonio-prometheus.*.service'"
+    register: services_list
+    changed_when: false
+
+  - name: Stop and disable carbonio-prometheus services
+    shell: "systemctl stop {{ item }} && systemctl mask {{ item }}"
+    loop: "{{ services_list.stdout_lines }}"
+    become: yes
+
+
+      
+
+
+
+#systemctl mask carbonio-mta-sidecar.service
+
+#remove hcl for carbonio-mta and carbonio-clamav
+#rm /etc/zextras/service-discover/carbonio-clamav.hcl
+# Notify an handler that restart service discover
