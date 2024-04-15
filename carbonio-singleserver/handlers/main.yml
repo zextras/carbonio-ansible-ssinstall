@@ -1,2 +1,6 @@
 ---
 # handlers file for carbonio-singleserver
+  - name: restart_service_discover
+    ansible.builtin.service:
+      name: service-discover
+      state: restarted

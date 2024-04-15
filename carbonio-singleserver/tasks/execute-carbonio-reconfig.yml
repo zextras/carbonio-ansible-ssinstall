@@ -4,11 +4,17 @@
 
 ---
 
+  - name: Calculate 10% of RAM
+    set_fact:
+      ram_size_mb: "{{ (ansible_memtotal_mb * 0.10) | int }}"
+    tags:
+      - singleserver-reconfig-cmds
+
   - name: Change localconfig
     become: true
     become_method: su
     become_user: zextras
-    command: 'zmlocalconfig -e ldap_common_threads=4 mailboxd_java_heap_size=2048'
+    command: '/opt/zextras/bin/zmlocalconfig -e ldap_common_threads=4 mailboxd_java_heap_size={{ ram_size_mb }}'
     tags:
       - singleserver-reconfig-cmds
 
@@ -16,7 +22,7 @@
     become: true
     become_method: su
     become_user: zextras
-    command: 'zmprov mcf zimbraScheduledTaskMaxRetryDelay 10m zimbraGalMaxResults 50 zimbraGalSyncMaxConcurrentClients 1 zimbraScheduledTaskMaxRetries 5 zimbraSmtpHostname "127.0.0.1" zimbraSmtpPort 25'
+    command: '/opt/zextras/bin/zmprov mcf zimbraScheduledTaskMaxRetryDelay 10m zimbraGalMaxResults 50 zimbraGalSyncMaxConcurrentClients 1 zimbraScheduledTaskMaxRetries 5 zimbraSmtpHostname "127.0.0.1" zimbraSmtpPort 25'
     tags:
       - singleserver-reconfig-cmds
 
@@ -24,7 +30,7 @@
     become: true
     become_method: su
     become_user: zextras
-    command: 'zmprov ms {{inventory_hostname}} zimbraAdminImapImportNumThreads 2 zimbraDatabaseSlowSqlThreshold 4s zimbraHttpNumThreads 100 zimbraImapNumThreads 100 zimbraLmtpNumThreads 20 zimbraMilterNumThreads 50 zimbraPop3NumThreads 50 zimbraScheduledTaskNumThreads 5 zimbraAmavisMaxServers 5 zimbraCBPolicydMaxRequests 400 zimbraCBPolicydMaxServers 5
+    command: '/opt/zextras/bin/zmprov ms {{inventory_hostname}} zimbraAdminImapImportNumThreads 2 zimbraDatabaseSlowSqlThreshold 4s zimbraHttpNumThreads 100 zimbraImapNumThreads 100 zimbraLmtpNumThreads 20 zimbraMilterNumThreads 50 zimbraPop3NumThreads 50 zimbraScheduledTaskNumThreads 5 zimbraAmavisMaxServers 5 zimbraCBPolicydMaxRequests 400 zimbraCBPolicydMaxServers 5
 zimbraCBPolicydMaxSpareServers 3 zimbraClamAVMaxThreads 2 zimbraGalMaxResults "" zimbraGalSyncMaxConcurrentClients "" zimbraHttpDosFilterMaxRequestsPerSec 15 zimbraImapMaxConnections 100
 zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100 zimbraScheduledTaskMaxRetries "" zimbraScheduledTaskMaxRetryDelay ""'
     tags:
@@ -34,7 +40,7 @@ zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100
     become: true
     become_method: su
     become_user: zextras
-    command: 'zmprov ms {{inventory_hostname}} -zimbraServiceEnabled stats'
+    command: '/opt/zextras/bin/zmprov ms {{inventory_hostname}} -zimbraServiceEnabled stats'
     tags:
       - singleserver-reconfig-cmds    
       
@@ -42,15 +48,28 @@ zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100
     become: true
     become_method: su
     become_user: zextras
-    command: 'zmprov ms {{inventory_hostname}} zimbraSmtpHostname "" zimbraSmtpPort ""'
+    command: '/opt/zextras/bin/zmprov ms {{inventory_hostname}} zimbraSmtpHostname "" zimbraSmtpPort ""'
     tags:
-      - singleserver-reconfig-cmds
-      
+      - singleserver-reconfig-cmds     
       
   - name: Disable AS/AV
     become: true
     become_method: su
     become_user: zextras
-    command: 'zmprov ms {{inventory_hostname}} zimbraSmtpHostname "" zimbraSmtpPort ""'
+    command: '/opt/zextras/bin/zmprov ms {{inventory_hostname}} zimbraSmtpHostname "" zimbraSmtpPort ""'
+    tags:
+      - singleserver-reconfig-cmds
+ 
+  - name: Calculate 10% of RAM
+    set_fact:
+      mysql_ram_size_mb: "{{ (ansible_memtotal_mb * 0.10) | int }}M"
+    tags:
+      - singleserver-reconfig-cmds
+
+  - name: Replace innodb_buffer_pool_size in my.cnf
+    ansible.builtin.replace:
+      path: /opt/zextras/conf/my.cnf
+      regexp: '^innodb_buffer_pool_size\s*=.*'
+      replace: 'innodb_buffer_pool_size        = {{ mysql_ram_size_mb }}'
     tags:
       - singleserver-reconfig-cmds
