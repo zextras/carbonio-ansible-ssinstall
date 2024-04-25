@@ -73,3 +73,38 @@ zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100
       replace: 'innodb_buffer_pool_size        = {{ mysql_ram_size_mb }}'
     tags:
       - singleserver-reconfig-cmds
+
+  - name: Calculate 10% of RAM for shared_buffers
+    set_fact:
+      ram_size_mb_psql: "{{ (ansible_memtotal_mb * 0.10) | int }}MB"
+    tags:
+      - singleserver-reconfig-cmds
+
+  - name: "Set Postgres Service name RHEL"
+    set_fact:
+      postgresql_service_name: "{{ rhel_postgresql_service_name }}"
+    when: ansible_os_family == "RedHat"
+    tags:
+      - singleserver-reconfig-cmds
+      
+  - name: Set shared_buffers
+    postgresql_set:
+      name: shared_buffers
+      value: "{{ ram_size_mb_psql }}"
+    become: yes
+    become_user: postgres
+    when: ansible_os_family == 'Debian'
+    notify: restart_postgres
+    tags:
+      - singleserver-reconfig-cmds
+
+  - name: Set shared_buffers
+    postgresql_set:
+      name: shared_buffers
+      value: "{{ ram_size_mb_psql }}"
+    become: yes
+    become_user: postgres
+    when: ansible_os_family == "RedHat"
+    notify: restart_postgres-rhel
+    tags:
+      - singleserver-reconfig-cmds   
