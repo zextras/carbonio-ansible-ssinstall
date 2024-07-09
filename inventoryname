@@ -44,7 +44,7 @@ single-srv.example.com
 #Not supported on single server
 
 [prometheusServers]
-#for multi-server infrastructure (or if it's needed according to customer's request)
+#if it's needed
 
 [syslogServer]
 #Not required on single server
