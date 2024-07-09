@@ -8,7 +8,18 @@
   tasks:
     - name: Fail if the host is in unsupported groups
       ansible.builtin.fail:
-        msg: "Carbonio Single Server doesn't support docs, preview, task, video services"
+        msg: |
+          Not required on single server. Remove hostnames from docs, preview, task, video groups.
+
+          You must leave the groups empty:
+          [docsServers]
+          #Not supported on single server
+          [previewServers]
+          #Not supported on single server
+          [taskServers]
+          #Not supported on single server
+          [videoServers]
+          #Not supported on single server
       when: inventory_hostname in groups['docsServers'] or
             inventory_hostname in groups['previewServers'] or
             inventory_hostname in groups['taskServers'] or
@@ -22,7 +33,12 @@
 
     - name: Fail if the host is in syslogServer group
       ansible.builtin.fail:
-        msg: "Not required on single server"
+        msg: |
+          Not required on single server. Remove hostnames from syslog group.
+
+          You must leave the group empty:
+          [syslogServer]
+          #Not required on single server
       when: inventory_hostname in groups['syslogServer']
       run_once: true
 
