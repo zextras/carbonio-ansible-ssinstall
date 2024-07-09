@@ -1,6 +1,30 @@
 # SPDX-FileCopyrightText: 2024 Zextras <https://www.zextras.com>
 #
 # SPDX-License-Identifier: GPL-3.0-only
+---
+- name: Check for unsupported services on single server
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Fail if the host is in unsupported groups
+      ansible.builtin.fail:
+        msg: "Carbonio Single Server doesn't support docs, preview, task, video services"
+      when: inventory_hostname in groups['docsServers'] or
+            inventory_hostname in groups['previewServers'] or
+            inventory_hostname in groups['taskServers'] or
+            inventory_hostname in groups['videoServers']
+      run_once: true
+
+    - name: Warn if Prometheus is required
+      debug:
+        msg: "Warning: If Prometheus is required, ensure sufficient resources are available."
+      when: inventory_hostname in groups['prometheusServers']
+
+    - name: Fail if the host is in syslogServer group
+      ansible.builtin.fail:
+        msg: "Not required on single server"
+      when: inventory_hostname in groups['syslogServer']
+      run_once: true
 
 - name: Install Carbonio
   import_playbook: "{{ install_path }}"
