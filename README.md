@@ -1,4 +1,4 @@
-# carbonio-ansible-ssconfig
+# Carbonio single server installation Ansible Playbook
 An ansible playbook to install  and optimize a Carbonio Single Server installation.
 This playbook imports the following playbook - https://github.com/zextras/carbonio-install-ansible to install a single server 
 
