@@ -1,0 +1,50 @@
+[postgresServers]
+__hostname__
+
+[masterDirectoryServers]
+__hostname__
+
+[replicaDirectoryServers]
+#Only for multi-server infrastructure
+
+[serviceDiscoverServers]
+__hostname__
+
+[dbsConnectorServers]
+__hostname__
+
+[mtaServers]
+__hostname__
+
+[antivirusServers]
+#Not used
+
+[proxyServers]
+__hostname__
+
+[proxyServers:vars]
+#webmailHostname=webmail.example.com
+
+[applicationServers]
+__hostname__
+
+[filesServers]
+__hostname__
+
+[docsServers]
+#Not supported on single server
+
+[previewServers]
+#Not supported on single server
+
+[taskServers]
+#Not supported on single server
+
+[videoServers]
+#Not supported on single server
+
+[prometheusServers]
+#if it's needed
+
+[syslogServer]
+#Not required on single server

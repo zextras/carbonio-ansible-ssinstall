@@ -10,7 +10,7 @@
   order: inventory
   gather_facts: yes
   roles:
-     - carbonio-singleserver
+     - ../roles/carbonio_singleserver
 
 
 
