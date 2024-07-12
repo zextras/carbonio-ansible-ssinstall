@@ -9,37 +9,13 @@
     - name: Fail if the host is in unsupported groups
       ansible.builtin.fail:
         msg: |
-          Not required on single server. Remove hostnames from docs, preview, task, video groups.
-
-          You must leave the groups empty:
-          [docsServers]
-          #Not supported on single server
-          [previewServers]
-          #Not supported on single server
-          [taskServers]
-          #Not supported on single server
-          [videoServers]
-          #Not supported on single server
+          Wrong inventory file. Dosc, LDAP replica, Video Server, Syslog and Prometheus are not supported on single server. 
+          Remove hostnames from docsServers, replicaDirectoryServers, syslogServer, prometheusServers and videoServers groups in your inventory file.
       when: inventory_hostname in groups['docsServers'] or
-            inventory_hostname in groups['previewServers'] or
-            inventory_hostname in groups['taskServers'] or
+            inventory_hostname in groups['replicaDirectoryServers'] or
+            inventory_hostname in groups['syslogServer'] or
+            inventory_hostname in groups['prometheusServers'] or
             inventory_hostname in groups['videoServers']
-      run_once: true
-
-    - name: Warn if Prometheus is required
-      debug:
-        msg: "Warning: If Prometheus is required, ensure sufficient resources are available."
-      when: inventory_hostname in groups['prometheusServers']
-
-    - name: Fail if the host is in syslogServer group
-      ansible.builtin.fail:
-        msg: |
-          Not required on single server. Remove hostnames from syslog group.
-
-          You must leave the group empty:
-          [syslogServer]
-          #Not required on single server
-      when: inventory_hostname in groups['syslogServer']
       run_once: true
 
 - name: Install Carbonio
