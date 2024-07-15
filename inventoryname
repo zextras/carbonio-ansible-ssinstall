@@ -1,0 +1,61 @@
+[postgresServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[masterDirectoryServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[replicaDirectoryServers]
+#Only for multi-server infrastructure. Don't fill it out
+
+[serviceDiscoverServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[dbsConnectorServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[mtaServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[antivirusServers]
+#Optional 
+#single-srv.example.com
+
+[proxyServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[proxyServers:vars]
+#webmailHostname=webmail.example.com
+
+[applicationServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[filesServers]
+#Optional
+#single-srv.example.com
+
+[docsServers]
+#Only for multi-server infrastructure. Don't fill it out
+
+[previewServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[taskServers]
+#Optional
+#single-srv.example.com
+
+[videoServers]
+#Only for multi-server infrastructure. Don't fill it out
+
+[prometheusServers]
+#Only for multi-server infrastructure. Don't fill it out
+
+[syslogServer]
+#Only for multi-server infrastructure. Don't fill it out
