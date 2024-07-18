@@ -1,50 +1,61 @@
 [postgresServers]
-__hostname__
+#This is a mandatory requirement
+single-srv.example.com
 
 [masterDirectoryServers]
-__hostname__
+#This is a mandatory requirement
+single-srv.example.com
 
 [replicaDirectoryServers]
-#Only for multi-server infrastructure
+#Only for multi-server infrastructure. Don't fill it out
 
 [serviceDiscoverServers]
-__hostname__
+#This is a mandatory requirement
+single-srv.example.com
 
 [dbsConnectorServers]
-__hostname__
+#This is a mandatory requirement
+single-srv.example.com
 
 [mtaServers]
-__hostname__
+#This is a mandatory requirement
+single-srv.example.com
 
 [antivirusServers]
-#Not used
+#Optional 
+#single-srv.example.com
 
 [proxyServers]
-__hostname__
+#This is a mandatory requirement
+single-srv.example.com
 
 [proxyServers:vars]
 #webmailHostname=webmail.example.com
 
 [applicationServers]
-__hostname__
+#This is a mandatory requirement
+single-srv.example.com
 
 [filesServers]
-__hostname__
+#Optional
+#single-srv.example.com
 
 [docsServers]
-#Not supported on single server
+#Only for multi-server infrastructure. Don't fill it out
 
 [previewServers]
-#Not supported on single server
+#This is a mandatory requirement
+single-srv.example.com
 
 [taskServers]
-#Not supported on single server
+#Optional
+#single-srv.example.com
 
 [videoServers]
-#Not supported on single server
+#Only for multi-server infrastructure. Don't fill it out
 
 [prometheusServers]
-#if it's needed
+#Only for multi-server infrastructure. Don't fill it out
 
 [syslogServer]
-#Not required on single server
+#Only for multi-server infrastructure. Don't fill it out
