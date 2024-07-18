@@ -21,10 +21,6 @@ single-srv.example.com
 #This is a mandatory requirement
 single-srv.example.com
 
-[antivirusServers]
-#Optional 
-#single-srv.example.com
-
 [proxyServers]
 #This is a mandatory requirement
 single-srv.example.com

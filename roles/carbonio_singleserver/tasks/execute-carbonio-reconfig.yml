@@ -51,14 +51,6 @@ zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100
     command: '/opt/zextras/bin/zmprov ms {{inventory_hostname}} zimbraSmtpHostname "" zimbraSmtpPort ""'
     tags:
       - singleserver-reconfig-cmds     
-      
-  - name: Disable AS/AV
-    become: true
-    become_method: su
-    become_user: zextras
-    command: '/opt/zextras/bin/zmprov ms {{inventory_hostname}} zimbraSmtpHostname "" zimbraSmtpPort ""'
-    tags:
-      - singleserver-reconfig-cmds
  
   - name: Calculate 10% of RAM
     set_fact:
