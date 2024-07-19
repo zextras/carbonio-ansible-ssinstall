@@ -2,22 +2,79 @@
 An ansible playbook to install and optimize a Carbonio Single Server installation.
 This playbook imports the following playbook - https://github.com/zextras/carbonio-install-ansible to install a single server 
 
-This playbook imports the Carbonio installation playbook automatically in carbonio-asible-ssinstall and here you have 2 options:
+This playbook imports the Carbonio installation playbook automatically as carbonio_ssinstall dependency.
 
- if you need to use Release Candidate version of Carbonio, then you need to clone carbonio-install-ansible playbook for installation and go to the rc branch. Return to carbonio-ansible-ssinstall and run with local path of the installation playbook”
-
-```
-ansible-playbook -i inventoryname playbooks/carbonio_ssinstall.yml  --extra-vars "install_path=/path/to/carbonio-install-ansible/carbonio-install/carbonio-install.yml"
-```
-
-If you need the Release version of Carbonio, then you can simply use Ansible Galaxy, install the collection, specify the playbook from the collection in the path and run the command:
+To install Carbonio Single Server you can simply use Ansible Galaxy: install the collection, specify the playbook from the collection  and run the command:
 
 ```
 #Install the collection 
-ansible-galaxy collection install zxbot.carbonio_install
+ansible-galaxy collection install zxbot.carbonio_ssinstall
 
 #Install and configure a single server
-ansible-playbook -i inventoryname playbooks/carbonio_ssinstall.yml  --extra-vars "install_path=zxbot.carbonio_install.carbonio_install"
+ansible-playbook -i inventoryname zxbot.carbonio_ssinstall.carbonio_ssinstall  --extra-vars "install_path=zxbot.carbonio_install.carbonio_install"
 ```
 
-*install_path - this variable should contain the path to the ansible playbook for Carbonio installation
+*install_path - this variable should contain the path to the ansible playbook for general Carbonio installation (it was installed as dependency)
+
+Please note that the Carbonio Single Server installation differs from the standard installation. Carbonio Single Server does not support certain components, so carefully review the inventory below before creating and using it:
+
+```
+[postgresServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[masterDirectoryServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[replicaDirectoryServers]
+#Only for multi-server infrastructure. Don't fill it out
+
+[serviceDiscoverServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[dbsConnectorServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[mtaServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[proxyServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[proxyServers:vars]
+#webmailHostname=webmail.example.com
+
+[applicationServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[filesServers]
+#Optional
+#single-srv.example.com
+
+[docsServers]
+#Only for multi-server infrastructure. Don't fill it out
+
+[previewServers]
+#This is a mandatory requirement
+single-srv.example.com
+
+[taskServers]
+#Optional
+#single-srv.example.com
+
+[videoServers]
+#Only for multi-server infrastructure. Don't fill it out
+
+[prometheusServers]
+#Only for multi-server infrastructure. Don't fill it out
+
+[syslogServer]
+#Only for multi-server infrastructure. Don't fill it out
+
+```
