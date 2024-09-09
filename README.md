@@ -27,9 +27,6 @@ single-srv.example.com
 #This is a mandatory requirement
 single-srv.example.com
 
-[replicaDirectoryServers]
-#Only for multi-server infrastructure. Don't fill it out
-
 [serviceDiscoverServers]
 #This is a mandatory requirement
 single-srv.example.com
@@ -57,18 +54,25 @@ single-srv.example.com
 #Optional
 #single-srv.example.com
 
-[docsServers]
-#Only for multi-server infrastructure. Don't fill it out
-
 [previewServers]
 #This is a mandatory requirement
 single-srv.example.com
 
+############ Optional Roles - to be installed on a different target ############
+
 [taskServers]
-#Optional
-#single-srv.example.com
+#srv2.example.com
+
+[docsServers]
+#srv2.example.com
 
 [videoServers]
+#srv3.example.com public_ip_address=x.y.z.t
+
+############ These Roles are not supported in Single-Server scenario ###########
+############ They are required for the proper Ansible installation #############
+
+[replicaDirectoryServers]
 #Only for multi-server infrastructure. Don't fill it out
 
 [prometheusServers]
@@ -76,5 +80,6 @@ single-srv.example.com
 
 [syslogServer]
 #Only for multi-server infrastructure. Don't fill it out
+
 
 ```
