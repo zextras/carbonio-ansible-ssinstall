@@ -20,61 +20,54 @@ Please note that the Carbonio Single Server installation differs from the standa
 
 ```
 [postgresServers]
-#This is a mandatory requirement
-single-srv.example.com
+srv1.example.com
 
 [masterDirectoryServers]
-#This is a mandatory requirement
-single-srv.example.com
-
-[replicaDirectoryServers]
-#Only for multi-server infrastructure. Don't fill it out
+srv1.example.com
 
 [serviceDiscoverServers]
-#This is a mandatory requirement
-single-srv.example.com
+srv1.example.com
 
 [dbsConnectorServers]
-#This is a mandatory requirement
-single-srv.example.com
+srv1.example.com
 
 [mtaServers]
-#This is a mandatory requirement
-single-srv.example.com
+srv1.example.com
 
 [proxyServers]
-#This is a mandatory requirement
-single-srv.example.com
+srv1.example.com
 
 [proxyServers:vars]
-#webmailHostname=webmail.example.com
+#webmailHostname=mail.example.com
 
 [applicationServers]
-#This is a mandatory requirement
-single-srv.example.com
+srv1.example.com
 
-[filesServers]
-#Optional
-#single-srv.example.com
-
-[docsServers]
-#Only for multi-server infrastructure. Don't fill it out
+############ Optional Roles ############
 
 [previewServers]
-#This is a mandatory requirement
-single-srv.example.com
+srv1.example.com
 
+[filesServers]
+srv1.example.com
+
+############ Optional Roles - to be installed on a different VM ############
 [taskServers]
-#Optional
-#single-srv.example.com
+#srv2.example.com
+
+[docsServers]
+#srv2.example.com
 
 [videoServers]
-#Only for multi-server infrastructure. Don't fill it out
+#srv3.example.com public_ip_address=x.y.z.t
+
+############ These Roles are not supported in Single-Server scenario ###########
+############ They are required for the proper Ansible installation #############
+
+[replicaDirectoryServers]
 
 [prometheusServers]
-#Only for multi-server infrastructure. Don't fill it out
 
 [syslogServer]
-#Only for multi-server infrastructure. Don't fill it out
 
 ```
