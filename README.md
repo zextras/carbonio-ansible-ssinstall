@@ -28,9 +28,6 @@ srv1.example.com
 [serviceDiscoverServers]
 srv1.example.com
 
-[dbsConnectorServers]
-srv1.example.com
-
 [mtaServers]
 srv1.example.com
 
@@ -63,6 +60,9 @@ srv1.example.com
 
 ############ These Roles are not supported in Single-Server scenario ###########
 ############ They are required for the proper Ansible installation #############
+
+[dbsConnectorServers]
+#Only for HA infrastructure from 24.12.0. Don't fill it out
 
 [replicaDirectoryServers]
 

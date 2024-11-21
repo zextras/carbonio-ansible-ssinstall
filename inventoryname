@@ -14,8 +14,7 @@ single-srv.example.com
 single-srv.example.com
 
 [dbsConnectorServers]
-#This is a mandatory requirement
-single-srv.example.com
+#Only for HA infrastructure. Don't fill it out
 
 [mtaServers]
 #This is a mandatory requirement
