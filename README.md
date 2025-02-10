@@ -58,6 +58,9 @@ srv1.example.com
 [videoServers]
 #srv3.example.com public_ip_address=x.y.z.t
 
+[workStreamServers]
+#srv4.example.com
+
 ############ These Roles are not supported in Single-Server scenario ###########
 ############ They are required for the proper Ansible installation #############
 
