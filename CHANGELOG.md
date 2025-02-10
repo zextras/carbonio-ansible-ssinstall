@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 * Added WSC installation support
-
+* Updated version of dependencies (carbonio-install-ansible --> 25.3.0)
 
 # Changelog
 
