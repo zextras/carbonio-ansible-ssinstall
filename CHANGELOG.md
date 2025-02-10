@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 
 ### Features
-*Added WSC installation support
+* Added WSC installation support
 
 
 # Changelog
