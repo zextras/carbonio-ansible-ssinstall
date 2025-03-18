@@ -7,5 +7,5 @@ collections:
     version: ">=1.5.4"
     source: https://galaxy.ansible.com
   - name: zxbot.carbonio_install
-    version: ">=24.12.0"
+    version: ">=25.3.0"
     source: https://galaxy.ansible.com
