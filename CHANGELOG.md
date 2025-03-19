@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. 
 
+### [25.3.1] (2025-3-19)
+
+### Bug Fixes
+* Fixed typo in conditions for execute-carbonio-reconfig
+
 ### [25.3.0] (2025-3-14)
 
 
