@@ -34,7 +34,7 @@
     become_method: su
     become_user: zextras
     command: '/opt/zextras/bin/zmprov ms {{inventory_hostname}} zimbraAdminImapImportNumThreads 2 zimbraDatabaseSlowSqlThreshold 4s zimbraHttpNumThreads 100 zimbraImapNumThreads 100 zimbraLmtpNumThreads 20 zimbraMilterNumThreads 50 zimbraPop3NumThreads 50 zimbraScheduledTaskNumThreads 5 zimbraAmavisMaxServers 5 zimbraCBPolicydMaxRequests 400 zimbraCBPolicydMaxServers 5 zimbraCBPolicydMaxSpareServers 3 zimbraClamAVMaxThreads 2 zimbraGalMaxResults "" zimbraGalSyncMaxConcurrentClients "" zimbraHttpDosFilterMaxRequestsPerSec 15 zimbraImapMaxConnections 100 zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100 zimbraScheduledTaskMaxRetries "" zimbraScheduledTaskMaxRetryDelay ""'
-    when: inventory_hostname in groups["applicationServerss"]
+    when: inventory_hostname in groups["applicationServers"]
     tags:
       - singleserver-reconfig-cmds
       
