@@ -84,9 +84,8 @@
       value: "{{ ram_size_mb_psql }}"
     become: yes
     become_user: postgres
-    when: ansible_os_family == 'Debian'
     notify: restart_postgres
-    when: inventory_hostname in groups["postgresServers"]
+    when: ansible_os_family == 'Debian' and inventory_hostname in groups["postgresServers"] 
     tags:
       - singleserver-reconfig-cmds
 
@@ -96,8 +95,7 @@
       value: "{{ ram_size_mb_psql }}"
     become: yes
     become_user: postgres
-    when: ansible_os_family == "RedHat"
-    notify: restart_postgres-rhel
-    when: inventory_hostname in groups["postgresServers"]
+    notify: restart_postgres_rhel
+    when: ansible_os_family == "RedHat" and inventory_hostname in groups["postgresServers"]
     tags:
       - singleserver-reconfig-cmds   

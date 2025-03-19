@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. 
 
+### [25.3.2] (2025-3-19)
+
+### Bug Fixes
+* Added condition to Stop needed sidecars only on main single server node
+* Fixed conditions for postgres restart 
+
 ### [25.3.1] (2025-3-19)
 
 ### Bug Fixes

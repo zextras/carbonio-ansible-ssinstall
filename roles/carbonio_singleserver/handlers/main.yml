@@ -8,5 +8,5 @@
   - name: restart_postgres
     service: name={{ postgresql_service_name }} state=restarted
 
-  - name: restart_postgres-rhel
+  - name: restart_postgres_rhel
     service: name={{ rhel_postgresql_service_name }} state=restarted

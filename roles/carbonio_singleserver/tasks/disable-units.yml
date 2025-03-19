@@ -7,6 +7,7 @@
       masked: yes
     with_items:
       - "{{ unnecessary_services }}"
+    when: inventory_hostname in groups["mtaServers"]
     tags:
       - disable-unnecessary-services
   
@@ -17,6 +18,7 @@
     with_items:
       - "{{ hcl_paths }}"
     become: yes
+    when: inventory_hostname in groups["mtaServers"]
     tags:
       - disable-unnecessary-services
 
