@@ -4,9 +4,9 @@
       name: "{{ item }}"
       state: stopped 
       enabled: false
-      masked: yes
     with_items:
       - "{{ unnecessary_services }}"
+    when: inventory_hostname in groups["mtaServers"]
     tags:
       - disable-unnecessary-services
   
@@ -17,6 +17,7 @@
     with_items:
       - "{{ hcl_paths }}"
     become: yes
+    when: inventory_hostname in groups["mtaServers"]
     tags:
       - disable-unnecessary-services
 
@@ -40,7 +41,6 @@
       name: "{{ item }}"
       state: stopped
       enabled: false
-#      masked: yes
     loop: "{{ services_list.stdout_lines }}"
     when: services_list.stdout_lines | length > 0
     notify: restart_service_discover
