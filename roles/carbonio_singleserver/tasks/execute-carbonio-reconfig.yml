@@ -7,6 +7,7 @@
   - name: Calculate 10% of RAM
     set_fact:
       ram_size_mb: "{{ (ansible_memtotal_mb * 0.10) | int }}"
+    when: inventory_hostname in groups["applicationServers"]
     tags:
       - singleserver-reconfig-cmds
 
@@ -15,6 +16,7 @@
     become_method: su
     become_user: zextras
     command: '/opt/zextras/bin/zmlocalconfig -e ldap_common_threads=4 mailboxd_java_heap_size={{ ram_size_mb }}'
+    when: inventory_hostname in groups["applicationServers"]
     tags:
       - singleserver-reconfig-cmds
 
@@ -23,6 +25,7 @@
     become_method: su
     become_user: zextras
     command: '/opt/zextras/bin/zmprov mcf zimbraScheduledTaskMaxRetryDelay 10m zimbraGalMaxResults 50 zimbraGalSyncMaxConcurrentClients 1 zimbraScheduledTaskMaxRetries 5 zimbraSmtpHostname "127.0.0.1" zimbraSmtpPort 25'
+    when: inventory_hostname in groups["applicationServers"]
     tags:
       - singleserver-reconfig-cmds
 
@@ -30,9 +33,8 @@
     become: true
     become_method: su
     become_user: zextras
-    command: '/opt/zextras/bin/zmprov ms {{inventory_hostname}} zimbraAdminImapImportNumThreads 2 zimbraDatabaseSlowSqlThreshold 4s zimbraHttpNumThreads 100 zimbraImapNumThreads 100 zimbraLmtpNumThreads 20 zimbraMilterNumThreads 50 zimbraPop3NumThreads 50 zimbraScheduledTaskNumThreads 5 zimbraAmavisMaxServers 5 zimbraCBPolicydMaxRequests 400 zimbraCBPolicydMaxServers 5
-zimbraCBPolicydMaxSpareServers 3 zimbraClamAVMaxThreads 2 zimbraGalMaxResults "" zimbraGalSyncMaxConcurrentClients "" zimbraHttpDosFilterMaxRequestsPerSec 15 zimbraImapMaxConnections 100
-zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100 zimbraScheduledTaskMaxRetries "" zimbraScheduledTaskMaxRetryDelay ""'
+    command: '/opt/zextras/bin/zmprov ms {{inventory_hostname}} zimbraAdminImapImportNumThreads 2 zimbraDatabaseSlowSqlThreshold 4s zimbraHttpNumThreads 100 zimbraImapNumThreads 100 zimbraLmtpNumThreads 20 zimbraMilterNumThreads 50 zimbraPop3NumThreads 50 zimbraScheduledTaskNumThreads 5 zimbraAmavisMaxServers 5 zimbraCBPolicydMaxRequests 400 zimbraCBPolicydMaxServers 5 zimbraCBPolicydMaxSpareServers 3 zimbraClamAVMaxThreads 2 zimbraGalMaxResults "" zimbraGalSyncMaxConcurrentClients "" zimbraHttpDosFilterMaxRequestsPerSec 15 zimbraImapMaxConnections 100 zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100 zimbraScheduledTaskMaxRetries "" zimbraScheduledTaskMaxRetryDelay ""'
+    when: inventory_hostname in groups["applicationServers"]
     tags:
       - singleserver-reconfig-cmds
       
@@ -49,12 +51,14 @@ zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100
     become_method: su
     become_user: zextras
     command: '/opt/zextras/bin/zmprov ms {{inventory_hostname}} zimbraSmtpHostname "" zimbraSmtpPort ""'
+    when: inventory_hostname in groups["mtaServers"]
     tags:
       - singleserver-reconfig-cmds     
  
   - name: Calculate 10% of RAM
     set_fact:
       mysql_ram_size_mb: "{{ (ansible_memtotal_mb * 0.10) | int }}M"
+    when: inventory_hostname in groups["postgresServers"]
     tags:
       - singleserver-reconfig-cmds
 
@@ -63,19 +67,14 @@ zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100
       path: /opt/zextras/conf/my.cnf
       regexp: '^innodb_buffer_pool_size\s*=.*'
       replace: 'innodb_buffer_pool_size        = {{ mysql_ram_size_mb }}'
+    when: inventory_hostname in groups["postgresServers"]
     tags:
       - singleserver-reconfig-cmds
 
   - name: Calculate 10% of RAM for shared_buffers
     set_fact:
       ram_size_mb_psql: "{{ (ansible_memtotal_mb * 0.10) | int }}MB"
-    tags:
-      - singleserver-reconfig-cmds
-
-  - name: "Set Postgres Service name RHEL"
-    set_fact:
-      postgresql_service_name: "{{ rhel_postgresql_service_name }}"
-    when: ansible_os_family == "RedHat"
+    when: inventory_hostname in groups["postgresServers"]
     tags:
       - singleserver-reconfig-cmds
       
@@ -85,8 +84,8 @@ zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100
       value: "{{ ram_size_mb_psql }}"
     become: yes
     become_user: postgres
-    when: ansible_os_family == 'Debian'
     notify: restart_postgres
+    when: ansible_os_family == 'Debian' and inventory_hostname in groups["postgresServers"] 
     tags:
       - singleserver-reconfig-cmds
 
@@ -96,7 +95,7 @@ zimbraMilterMaxConnections 2000 zimbraMtaMaxUse 100 zimbraPop3MaxConnections 100
       value: "{{ ram_size_mb_psql }}"
     become: yes
     become_user: postgres
-    when: ansible_os_family == "RedHat"
-    notify: restart_postgres-rhel
+    notify: restart_postgres_rhel
+    when: ansible_os_family == "RedHat" and inventory_hostname in groups["postgresServers"]
     tags:
       - singleserver-reconfig-cmds   
