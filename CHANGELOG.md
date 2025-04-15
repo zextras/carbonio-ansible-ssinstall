@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. 
 
+### [25.3.5] (2025-4-10)
+
+### Bug Fixes
+* Updated version of dependencies (carbonio-install-ansible --> 25.3.3)
+
+### [25.3.4] (2025-3-19)
+
+### Bug Fixes
+* Updated version of dependencies (carbonio-install-ansible --> 25.3.2)
+
 ### [25.3.3] (2025-3-19)
 
 ### Bug Fixes
@@ -14,6 +24,11 @@ All notable changes to this project will be documented in this file.
 * Fixed conditions for postgres restart 
 
 ### [25.3.1] (2025-3-19)
+
+### Bug Fixes
+* Fixed typo in conditions for execute-carbonio-reconfig
+
+### [25.3.0] (2025-3-14)
 
 ### Bug Fixes
 * Fixed typo in conditions for execute-carbonio-reconfig
