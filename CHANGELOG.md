@@ -30,6 +30,10 @@ All notable changes to this project will be documented in this file.
 
 ### [25.3.0] (2025-3-14)
 
+### Bug Fixes
+* Fixed typo in conditions for execute-carbonio-reconfig
+
+### [25.3.0] (2025-3-14)
 
 ### Features
 * Added WSC installation support
