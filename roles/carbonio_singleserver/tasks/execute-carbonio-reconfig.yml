@@ -79,8 +79,8 @@
       - singleserver-reconfig-cmds
       
   - name: Set shared_buffers
-    postgresql_set:
-      name: shared_buffers
+    community.postgresql.postgresql_alter_system:
+      param: shared_buffers
       value: "{{ ram_size_mb_psql }}"
     become: yes
     become_user: postgres
@@ -90,8 +90,8 @@
       - singleserver-reconfig-cmds
 
   - name: Set shared_buffers
-    postgresql_set:
-      name: shared_buffers
+    community.postgresql.postgresql_alter_system:
+      param: shared_buffers
       value: "{{ ram_size_mb_psql }}"
     become: yes
     become_user: postgres
