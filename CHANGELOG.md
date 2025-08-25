@@ -2,10 +2,11 @@
 
 All notable changes to this project will be documented in this file. 
 
-### [25.9.0] (2025-8-19)
+### [25.9.0] (2025-8-25)
 
 ### Bug Fixes
 * Updated version and version of dependencies (carbonio-install-ansible --> 25.9.0)
+* Replaced deprecated Ansible module `postgresql_set` with `postgresql_alter_system`  (ensures forward compatibility with community.postgresql ≥ 5.0, removes deprecation warnings)
 
 ### [25.6.0] (2025-5-21)
 
