@@ -30,5 +30,15 @@
       src: templates/config.ini.j2
       dest: /etc/carbonio/preview/config.ini
       mode: '0644'
-    notify: restart_preview
     when: inventory_hostname in groups["previewServers"]
+    tags:
+      - fix-config
+
+  - name: Restart Preview
+    service:
+      name: carbonio-preview.service
+      state: restarted
+    when: inventory_hostname in groups["previewServers"]
+    tags:
+      - fix-config
+
