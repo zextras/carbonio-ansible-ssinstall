@@ -8,4 +8,3 @@
 
   - import_tasks: execute-carbonio-reconfig.yml
   - import_tasks: disable-units.yml
-  - import_tasks: configure-configini.yml
