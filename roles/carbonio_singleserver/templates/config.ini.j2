@@ -4,5 +4,4 @@
 
 [storage]
 
-memcached_server_full_path_urls = 127.0.0.1:11211
 nginx_lookup_server_full_path_urls = https://{{ hostvars[groups['applicationServers'][0]].inventory_hostname }}:7072
