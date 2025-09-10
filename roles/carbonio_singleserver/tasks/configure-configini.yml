@@ -27,7 +27,7 @@
       
   - name: Deploy Preview config for single-server
     ansible.builtin.template:
-      src: templates/config.ini.j2
+      src: config.ini.j2
       dest: /etc/carbonio/preview/config.ini
       mode: '0644'
     when: inventory_hostname in groups["previewServers"]
