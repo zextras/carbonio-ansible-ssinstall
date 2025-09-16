@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. 
 
+### [25.6.1] (2025-9-16)
+
+### Bug Fixes
+* Made carbonio prov write values directly to LDAP without SOAP calls to the application server
+* Updated version and version of dependencies (carbonio-install-ansible --> 25.6.1)
+
 ### [25.6.0] (2025-5-21)
 
 ### Bug Fixes
