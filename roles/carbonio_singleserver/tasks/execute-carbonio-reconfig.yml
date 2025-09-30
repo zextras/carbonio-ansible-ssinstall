@@ -79,8 +79,8 @@
       - singleserver-reconfig-cmds
       
   - name: Set shared_buffers
-    postgresql_set:
-      name: shared_buffers
+    community.postgresql.postgresql_alter_system:
+      param: shared_buffers
       value: "{{ ram_size_mb_psql }}"
     become: yes
     become_user: postgres
@@ -90,8 +90,8 @@
       - singleserver-reconfig-cmds
 
   - name: Set shared_buffers
-    postgresql_set:
-      name: shared_buffers
+    community.postgresql.postgresql_alter_system:
+      param: shared_buffers
       value: "{{ ram_size_mb_psql }}"
     become: yes
     become_user: postgres
@@ -99,3 +99,46 @@
     when: ansible_os_family == "RedHat" and inventory_hostname in groups["postgresServers"]
     tags:
       - singleserver-reconfig-cmds   
+
+  - name: Fix memcached config
+    become: true
+    become_method: su
+    become_user: zextras
+    command: '/opt/zextras/bin/carbonio prov -l ms {{ ansible_fqdn }} zimbraMemcachedBindAddress 127.0.0.1'
+    when: inventory_hostname in groups["proxyServers"] and (groups['filesServers'] | length > 0 or groups['docsServers'] | length > 0 or groups['previewServers'] | length > 0)
+    tags:
+      - singleserver-reconfig-cmds 
+
+  - name: Restart memcached[SysV]
+    become: true
+    become_method: su
+    become_user: zextras
+    command: '/opt/zextras/bin/zmmemcachedctl restart'
+    when: inventory_hostname in groups["proxyServers"] and (groups['filesServers'] | length > 0 or groups['docsServers'] | length > 0 or groups['previewServers'] | length > 0) and ansible_distribution_major_version != "9" and ansible_distribution_major_version != "24"
+    tags:
+      - singleserver-reconfig-cmds 
+
+  - name: Restart memcached[Systemd]
+    ansible.builtin.service:
+      name: carbonio-memcached
+      state: restarted
+    when: inventory_hostname in groups["proxyServers"] and (groups['filesServers'] | length > 0 or groups['docsServers'] | length > 0 or groups['previewServers'] | length > 0) and (ansible_distribution_major_version == "9"  or ansible_distribution_major_version == "24")
+    tags:
+      - singleserver-reconfig-cmds 
+      
+  - name: Deploy Preview config for single-server
+    ansible.builtin.template:
+      src: config.ini.j2
+      dest: /etc/carbonio/preview/config.ini
+      mode: '0644'
+    when: inventory_hostname in groups["previewServers"]
+    tags:
+      - singleserver-reconfig-cmds 
+
+  - name: Restart Preview
+    service:
+      name: carbonio-preview.service
+      state: restarted
+    when: inventory_hostname in groups["previewServers"]
+    tags:
+      - singleserver-reconfig-cmds 

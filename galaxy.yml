@@ -8,7 +8,7 @@ namespace: zxbot
 name: carbonio_ssinstall
 
 # The version of the collection. Must be compatible with semantic versioning
-version: 25.6.1
+version: 25.9.0
 
 # The path to the Markdown (.md) readme file. This path is relative to the root of the collection
 readme: README.md
@@ -41,9 +41,9 @@ tags: [zextras, carbonio]
 # L(specifiers,https://python-semanticversion.readthedocs.io/en/latest/#requirement-specification). Multiple version
 # range specifiers can be set and are separated by ','
 dependencies: 
-  "community.postgresql": ">=3.4.0"
+  "community.postgresql": ">=3.13.0"
   "ansible.posix": ">=1.5.4"
-  "zxbot.carbonio_install": ">=25.6.1"
+  "zxbot.carbonio_install": ">=25.9.0"
 
 # The URL of the originating SCM repository
 repository: https://github.com/zextras/carbonio-install-ansible

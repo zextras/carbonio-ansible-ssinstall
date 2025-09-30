@@ -1,11 +1,11 @@
 collections:
   # Install a collection from Ansible Galaxy.
   - name: community.postgresql
-    version: ">=3.4.0"
+    version: ">=3.13.0"
     source: https://galaxy.ansible.com
   - name: ansible.posix
     version: ">=1.5.4"
     source: https://galaxy.ansible.com
   - name: zxbot.carbonio_install
-    version: ">=25.6.1"
+    version: ">=25.9.0"
     source: https://galaxy.ansible.com
