@@ -2,12 +2,19 @@
 
 All notable changes to this project will be documented in this file. 
 
-### [25.9.0] (2025-9-12)
+### [25.9.0] (2025-9-30)
 
 ### Features
 * Updated version and version of dependencies (carbonio-install-ansible --> 25.9.0)
 * Replaced deprecated Ansible module `postgresql_set` with `postgresql_alter_system`  (ensures forward compatibility with community.postgresql ≥ 5.0, removes deprecation warnings)
+* Updated collection dependency: now requires community.postgresql version 3.13.0 or higher, as newer module is used
 * Since config.ini became optional for Carbonio 25.9.0, added config.ini and memcache configuration for single server
+
+### [25.6.1] (2025-9-16)
+
+### Bug Fixes
+* Made carbonio prov write values directly to LDAP without SOAP calls to the application server
+* Updated version and version of dependencies (carbonio-install-ansible --> 25.6.1)
 
 ### [25.6.0] (2025-5-21)
 
