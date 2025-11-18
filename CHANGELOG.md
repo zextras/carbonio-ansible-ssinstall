@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. 
 
+### [25.12.0] (2025-11-18)
+
+### Features
+* Updated version and version of dependencies (carbonio-install-ansible --> 25.12.0)
+
 ### [25.9.0] (2025-9-30)
 
 ### Features
