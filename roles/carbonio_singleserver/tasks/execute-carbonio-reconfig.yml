@@ -126,19 +126,3 @@
     tags:
       - singleserver-reconfig-cmds 
       
-  - name: Deploy Preview config for single-server
-    ansible.builtin.template:
-      src: config.ini.j2
-      dest: /etc/carbonio/preview/config.ini
-      mode: '0644'
-    when: inventory_hostname in groups["previewServers"]
-    tags:
-      - singleserver-reconfig-cmds 
-
-  - name: Restart Preview
-    service:
-      name: carbonio-preview.service
-      state: restarted
-    when: inventory_hostname in groups["previewServers"]
-    tags:
-      - singleserver-reconfig-cmds 
