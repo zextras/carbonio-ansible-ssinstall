@@ -98,31 +98,4 @@
     notify: restart_postgres_rhel
     when: ansible_os_family == "RedHat" and inventory_hostname in groups["postgresServers"]
     tags:
-      - singleserver-reconfig-cmds   
-
-  - name: Fix memcached config
-    become: true
-    become_method: su
-    become_user: zextras
-    command: '/opt/zextras/bin/carbonio prov -l ms {{ ansible_fqdn }} zimbraMemcachedBindAddress 127.0.0.1'
-    when: inventory_hostname in groups["proxyServers"] and (groups['filesServers'] | length > 0 or groups['docsServers'] | length > 0 or groups['previewServers'] | length > 0)
-    tags:
-      - singleserver-reconfig-cmds 
-
-  - name: Restart memcached[SysV]
-    become: true
-    become_method: su
-    become_user: zextras
-    command: '/opt/zextras/bin/zmmemcachedctl restart'
-    when: inventory_hostname in groups["proxyServers"] and (groups['filesServers'] | length > 0 or groups['docsServers'] | length > 0 or groups['previewServers'] | length > 0) and ansible_distribution_major_version != "9" and ansible_distribution_major_version != "24"
-    tags:
-      - singleserver-reconfig-cmds 
-
-  - name: Restart memcached[Systemd]
-    ansible.builtin.service:
-      name: carbonio-memcached
-      state: restarted
-    when: inventory_hostname in groups["proxyServers"] and (groups['filesServers'] | length > 0 or groups['docsServers'] | length > 0 or groups['previewServers'] | length > 0) and (ansible_distribution_major_version == "9"  or ansible_distribution_major_version == "24")
-    tags:
-      - singleserver-reconfig-cmds 
-      
+      - singleserver-reconfig-cmds
