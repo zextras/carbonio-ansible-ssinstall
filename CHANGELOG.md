@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. 
 
+### [25.12.0] (2025-12-17)
+
+### Features
+* Updated version and version of dependencies (carbonio-install-ansible --> 25.12.0)
+* Removed config.ini and zimbraMemcachedBindAddress configuration steps
+* Starting from 25.12.0, Docs, WSC, and VideoServer can be installed on a single server together with all other services.
+
 ### [25.9.0] (2025-9-30)
 
 ### Features

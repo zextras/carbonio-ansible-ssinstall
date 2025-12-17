@@ -9,8 +9,8 @@
     - name: Fail if the host is in unsupported groups
       ansible.builtin.fail:
         msg: |
-          Wrong inventory file. Dosc, LDAP replica, Video Server, Syslog and Prometheus are not supported on single server. 
-          Remove hostnames from docsServers, replicaDirectoryServers, syslogServer, prometheusServers and videoServers groups in your inventory file.
+          Wrong inventory file. LDAP replica, Syslog and Prometheus are not supported on single server. 
+          Remove hostnames from replicaDirectoryServers, syslogServer, prometheusServers groups in your inventory file.
       when: inventory_hostname in groups['replicaDirectoryServers'] or
             inventory_hostname in groups['syslogServer'] or
             inventory_hostname in groups['prometheusServers']
