@@ -29,6 +29,10 @@ srv1.example.com
 [masterDirectoryServers]
 srv1.example.com
 
+# Custom Default Domain (Optional)
+[masterDirectoryServers:vars]
+#default_domain=domain.com # Replace with your desired domain
+
 [serviceDiscoverServers]
 srv1.example.com
 
@@ -52,9 +56,6 @@ srv1.example.com
 [filesServers]
 srv1.example.com
 
-# Custom Default Domain (Optional)
-[masterDirectoryServers:vars]
-#default_domain=domain.com # Replace with your desired domain
 
 ############ Optional Roles - to be installed on a different VM ############
 [taskServers]
