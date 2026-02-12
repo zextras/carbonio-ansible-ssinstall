@@ -16,6 +16,10 @@ ansible-playbook -i inventoryname zxbot.carbonio_ssinstall.carbonio_ssinstall  -
 
 *install_path - this variable should contain the path to the ansible playbook for general Carbonio installation (it was installed as dependency)
 
+If default_domain is defined: The bootstrap process will create only this domain as the default/first domain. All system accounts (admin, spam., ham., virus-quarantine., galsync.) will be created under this domain.
+
+If omitted: Falls back to a domain derived from the server's hostname
+
 Please note that the Carbonio Single Server installation differs from the standard installation. Carbonio Single Server does not support certain components, so carefully review the inventory below before creating and using it:
 
 ```
@@ -24,6 +28,10 @@ srv1.example.com
 
 [masterDirectoryServers]
 srv1.example.com
+
+# Custom Default Domain (Optional)
+[masterDirectoryServers:vars]
+#default_domain=domain.com # Replace with your desired domain
 
 [serviceDiscoverServers]
 srv1.example.com
@@ -47,6 +55,7 @@ srv1.example.com
 
 [filesServers]
 srv1.example.com
+
 
 ############ Optional Roles - to be installed on a different VM ############
 [taskServers]
