@@ -2,11 +2,11 @@
 
 All notable changes to this project will be documented in this file. 
 
+### [26.3.0] (2026-03-11)
 
-### [25.12.1] (2025-12-22)
 
 ### Features
-* Updated version and version of dependencies (carbonio-install-ansible --> 25.12.1)
+* Added support for defining a custom default domain in the inventory file under the [masterDirectoryServers:vars] group during installation.
 
 ### [25.12.0] (2025-12-17)
 
