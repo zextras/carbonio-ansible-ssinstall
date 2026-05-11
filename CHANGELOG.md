@@ -5,9 +5,11 @@ All notable changes to this project will be documented in this file.
 
 ### [26.6.0] (2026-06-10)
 
+### Deprecated
+* This playbook is deprecated starting from version 26.6.0.
+  Single Server installation is now included in the `carbonio-install-ansible` playbook.
+  Use https://github.com/zextras/carbonio-install-ansible for new installations.
 
-### Bug Fixes
-* Fixed deprecated ansible_* facts usage by migrating to ansible_facts for compatibility with ansible-core 2.24
 
 
 ### [26.3.0] (2026-03-11)

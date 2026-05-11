@@ -1,4 +1,16 @@
 # Carbonio single server installation Ansible Playbook
+
+> **Deprecated since version 26.6.0**
+>
+> This playbook is deprecated starting from version `26.6.0`.
+> Single-server installation is now supported directly by the official
+> `carbonio-install-ansible` playbook:
+>
+> https://github.com/zextras/carbonio-install-ansible
+>
+> Use the official `carbonio-install-ansible` playbook for new single server installations.
+> This repository is kept only for compatibility with older installation flows.
+
 An ansible playbook to install and optimize a Carbonio Single Server installation.
 This playbook imports the following playbook - https://github.com/zextras/carbonio-install-ansible to install a single server 
 
