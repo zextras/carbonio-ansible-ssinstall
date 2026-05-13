@@ -2,20 +2,34 @@
 
 All notable changes to this project will be documented in this file. 
 
+
+### [26.6.0] (2026-06-10)
+
+### Deprecated
+* This playbook is deprecated starting from version 26.6.0.
+  Single Server installation is now included in the `carbonio-install-ansible` playbook.
+  Use https://github.com/zextras/carbonio-install-ansible for new installations.
+
+
+
 ### [26.3.0] (2026-03-11)
 
 
 ### Features
 * Added support for defining a custom default domain in the inventory file under the [masterDirectoryServers:vars] group during installation.
 
+
 ### [25.12.0] (2025-12-17)
+
 
 ### Features
 * Updated version and version of dependencies (carbonio-install-ansible --> 25.12.0)
 * Removed config.ini and zimbraMemcachedBindAddress configuration steps
 * Starting from 25.12.0, Docs, WSC, and VideoServer can be installed on a single server together with all other services.
 
+
 ### [25.9.0] (2025-9-30)
+
 
 ### Features
 * Updated version and version of dependencies (carbonio-install-ansible --> 25.9.0)
@@ -23,50 +37,68 @@ All notable changes to this project will be documented in this file.
 * Updated collection dependency: now requires community.postgresql version 3.13.0 or higher, as newer module is used
 * Since config.ini became optional for Carbonio 25.9.0, added config.ini and memcache configuration for single server
 
+
 ### [25.6.1] (2025-9-16)
+
 
 ### Bug Fixes
 * Made carbonio prov write values directly to LDAP without SOAP calls to the application server
 * Updated version and version of dependencies (carbonio-install-ansible --> 25.6.1)
 
+
 ### [25.6.0] (2025-5-21)
+
 
 ### Features
 * Updated version and version of dependencies (carbonio-install-ansible --> 25.6.0)
 * Changed WSC host for the installation, check updated README or inventory file
 
+
 ### [25.3.5] (2025-4-10)
+
 
 ### Bug Fixes
 * Updated version of dependencies (carbonio-install-ansible --> 25.3.3)
 
+
 ### [25.3.4] (2025-3-19)
+
 
 ### Bug Fixes
 * Updated version of dependencies (carbonio-install-ansible --> 25.3.2)
 
+
 ### [25.3.3] (2025-3-19)
+
 
 ### Bug Fixes
 * Implemented to stop and disable services instead of masking
 
+
 ### [25.3.2] (2025-3-19)
+
 
 ### Bug Fixes
 * Added condition to stop needed sidecars only on main single server node
 * Fixed conditions for postgres restart 
 
+
 ### [25.3.1] (2025-3-19)
 
-### Bug Fixes
-* Fixed typo in conditions for execute-carbonio-reconfig
-
-### [25.3.0] (2025-3-14)
 
 ### Bug Fixes
 * Fixed typo in conditions for execute-carbonio-reconfig
 
+
 ### [25.3.0] (2025-3-14)
+
+
+### Bug Fixes
+* Fixed typo in conditions for execute-carbonio-reconfig
+
+
+### [25.3.0] (2025-3-14)
+
 
 ### Features
 * Added WSC installation support
