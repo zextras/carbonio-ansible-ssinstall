@@ -2,22 +2,17 @@
 
 All notable changes to this project will be documented in this file. 
 
-
-### [26.6.0] (2026-06-10)
-
-### Deprecated
-* This playbook is deprecated starting from version 26.6.0.
-  Single Server installation is now included in the `carbonio-install-ansible` playbook.
-  Use https://github.com/zextras/carbonio-install-ansible for new installations.
+### [26.3.1] (2026-03-24)
 
 
+### Bug Fixes
+* Fixed an issue where inline comments in inventory variable examples were propagated as part of the value into generated configuration files, causing invalid Postfix configuration
 
 ### [26.3.0] (2026-03-11)
 
 
 ### Features
 * Added support for defining a custom default domain in the inventory file under the [masterDirectoryServers:vars] group during installation.
-
 
 ### [25.12.0] (2025-12-17)
 
